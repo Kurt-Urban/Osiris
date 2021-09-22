@@ -2,21 +2,57 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CreatePostInput {
-  title: String!
-  type: String
+input CreateServerInput {
+  id: String!
+  ownerID: String!
+  serverName: String!
+}
+
+input CreateUserInput {
+  firstName: String!
+  id: String!
+  lastName: String!
+  servers: [String!]!
 }
 
 type Mutation {
-  createPost(createPostInput: CreatePostInput!): Post!
-}
-
-type Post {
-  id: Int!
-  title: String!
-  type: String
+  createServer(createServerInput: CreateServerInput!): Server!
+  createUser(createUserInput: CreateUserInput!): User!
+  removeServer(id: String!): Server!
+  removeUser(id: String!): User!
+  updateServer(updateServerInput: UpdateServerInput!): Server!
+  updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type Query {
-  posts: [Post!]!
+  getServers: [Server!]!
+  getUser(id: String!): User!
+  getUsers: [User!]!
+  server(id: String!): Server!
+}
+
+type Server {
+  id: String!
+  ownerID: String!
+  serverName: String!
+}
+
+input UpdateServerInput {
+  id: String!
+  ownerID: String!
+  serverName: String!
+}
+
+input UpdateUserInput {
+  firstName: String!
+  id: String!
+  lastName: String!
+  servers: [String!]!
+}
+
+type User {
+  firstName: String!
+  id: String!
+  lastName: String!
+  servers: [String!]!
 }
