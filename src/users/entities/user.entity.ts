@@ -1,10 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Server } from 'src/servers/entities/server.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 @ObjectType()
 export class User {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
@@ -16,7 +17,7 @@ export class User {
   @Field()
   lastName: string;
 
-  @Column('simple-array')
-  @Field(() => [String])
-  servers: string[];
+  @OneToMany(() => Server, (server) => server.owner)
+  @Field(() => [Server], { nullable: true })
+  servers?: Promise<Server[]>;
 }

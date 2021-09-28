@@ -1,10 +1,17 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { User } from 'src/users/entities/user.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 @ObjectType()
 export class Server {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
@@ -15,4 +22,8 @@ export class Server {
   @Column()
   @Field()
   ownerID: string;
+
+  @ManyToOne(() => User, (user) => user.servers)
+  @Field((type) => User)
+  owner: Promise<User>;
 }

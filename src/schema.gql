@@ -3,56 +3,52 @@
 # ------------------------------------------------------
 
 input CreateServerInput {
-  id: String!
   ownerID: String!
   serverName: String!
 }
 
 input CreateUserInput {
   firstName: String!
-  id: String!
   lastName: String!
-  servers: [String!]!
 }
 
 type Mutation {
-  createServer(createServerInput: CreateServerInput!): Server!
-  createUser(createUserInput: CreateUserInput!): User!
-  removeServer(id: String!): Server!
-  removeUser(id: String!): User!
-  updateServer(updateServerInput: UpdateServerInput!): Server!
-  updateUser(updateUserInput: UpdateUserInput!): User!
+  createServer(data: CreateServerInput!): Server!
+  createUser(data: CreateUserInput!): User!
+  deleteServer(id: String!): Server!
+  deleteUser(id: String!): User!
+  updateServer(data: UpdateServerInput!, id: String!): Server!
+  updateUser(data: UpdateUserInput!, id: String!): User!
 }
 
 type Query {
+  getServer(id: String!): Server!
   getServers: [Server!]!
   getUser(id: String!): User!
   getUsers: [User!]!
-  server(id: String!): Server!
 }
 
 type Server {
   id: String!
+  owner: User!
   ownerID: String!
   serverName: String!
 }
 
 input UpdateServerInput {
-  id: String!
   ownerID: String!
   serverName: String!
 }
 
 input UpdateUserInput {
-  firstName: String!
-  id: String!
-  lastName: String!
-  servers: [String!]!
+  firstName: String
+  lastName: String
+  servers: [String!]
 }
 
 type User {
   firstName: String!
   id: String!
   lastName: String!
-  servers: [String!]!
+  servers: [Server!]
 }

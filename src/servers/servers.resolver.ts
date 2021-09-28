@@ -1,18 +1,24 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Parent,
+  ResolveField,
+} from '@nestjs/graphql';
 import { ServersService } from './servers.service';
 import { Server } from './entities/server.entity';
 import { CreateServerInput } from './dto/create-server.input';
 import { UpdateServerInput } from './dto/update-server.input';
+import { User } from 'src/users/entities/user.entity';
 
 @Resolver(() => Server)
 export class ServersResolver {
   constructor(private readonly serversService: ServersService) {}
 
-  @Mutation(() => Server)
-  createServer(
-    @Args('createServerInput') createServerInput: CreateServerInput,
-  ) {
-    return this.serversService.createServer(createServerInput);
+  @ResolveField((returns) => User)
+  owner(@Parent() server: Server): Promise<User> {
+    return this.serversService.getOwner(server.ownerID);
   }
 
   @Query(() => [Server])
@@ -20,20 +26,23 @@ export class ServersResolver {
     return this.serversService.getServers();
   }
 
-  @Query(() => Server, { name: 'server' })
+  @Query(() => Server)
   getServer(@Args('id') id: string) {
     return this.serversService.getServer(id);
   }
 
   @Mutation(() => Server)
-  updateServer(
-    @Args('updateServerInput') updateServerInput: UpdateServerInput,
-  ) {
-    return this.serversService.update(updateServerInput.id, updateServerInput);
+  createServer(@Args('data') data: CreateServerInput) {
+    return this.serversService.createServer(data);
   }
 
   @Mutation(() => Server)
-  removeServer(@Args('id') id: string) {
-    return this.serversService.remove(id);
+  updateServer(@Args('id') id: string, @Args('data') data: UpdateServerInput) {
+    return this.serversService.updateServer(id, data);
+  }
+
+  @Mutation(() => Server)
+  deleteServer(@Args('id') id: string) {
+    return this.serversService.deleteServer(id);
   }
 }
