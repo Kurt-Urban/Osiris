@@ -11,7 +11,6 @@ import { Server } from './entities/server.entity';
 export class ServersService {
   constructor(
     @InjectRepository(Server) private serversRepository: Repository<Server>,
-    private usersService: UsersService,
   ) {}
 
   async createServer(input: CreateServerInput) {
@@ -36,9 +35,5 @@ export class ServersService {
     //cascade deletes
     const server = await this.serversRepository.findOneOrFail(id);
     return this.serversRepository.remove(server);
-  }
-
-  async getOwner(id: string): Promise<User> {
-    return await this.usersService.getUser(id);
   }
 }

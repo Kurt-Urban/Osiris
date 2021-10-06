@@ -36,14 +36,13 @@ type Server {
 }
 
 input UpdateServerInput {
-  ownerID: String!
+  ownerID: String
   serverName: String!
 }
 
 input UpdateUserInput {
   firstName: String
   lastName: String
-  servers: [String!]
 }
 
 type User {

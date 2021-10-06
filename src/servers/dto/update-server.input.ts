@@ -5,7 +5,4 @@ import { InputType, Field, PartialType } from '@nestjs/graphql';
 export class UpdateServerInput extends PartialType(CreateServerInput) {
   @Field()
   serverName: string;
-
-  @Field()
-  ownerID: string;
 }

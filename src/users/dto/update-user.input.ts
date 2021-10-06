@@ -9,7 +9,4 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
 
   @Field({ nullable: true })
   lastName?: string;
-
-  @Field((type) => [String], { nullable: true })
-  servers?: Promise<Server[]>;
 }

@@ -24,6 +24,7 @@ export class Server {
   ownerID: string;
 
   @ManyToOne(() => User, (user) => user.servers)
+  @JoinColumn({ name: 'ownerID', referencedColumnName: 'id' })
   @Field((type) => User)
   owner: Promise<User>;
 }

@@ -16,11 +16,6 @@ import { User } from 'src/users/entities/user.entity';
 export class ServersResolver {
   constructor(private readonly serversService: ServersService) {}
 
-  @ResolveField((returns) => User)
-  owner(@Parent() server: Server): Promise<User> {
-    return this.serversService.getOwner(server.ownerID);
-  }
-
   @Query(() => [Server])
   getServers() {
     return this.serversService.getServers();
