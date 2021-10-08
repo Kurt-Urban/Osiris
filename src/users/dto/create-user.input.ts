@@ -7,4 +7,7 @@ export class CreateUserInput {
 
   @Field()
   lastName: string;
+
+  @Field()
+  googleID: string;
 }

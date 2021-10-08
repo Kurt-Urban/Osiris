@@ -10,6 +10,14 @@ export class User {
   id: string;
 
   @Column()
+  @Field({ nullable: true })
+  googleID: string;
+
+  @Column()
+  @Field({ nullable: true })
+  email: string;
+
+  @Column()
   @Field()
   firstName: string;
 

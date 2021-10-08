@@ -9,6 +9,7 @@ input CreateServerInput {
 
 input CreateUserInput {
   firstName: String!
+  googleID: String!
   lastName: String!
 }
 
@@ -42,11 +43,14 @@ input UpdateServerInput {
 
 input UpdateUserInput {
   firstName: String
+  googleID: String
   lastName: String
 }
 
 type User {
+  email: String
   firstName: String!
+  googleID: String
   id: String!
   lastName: String!
   servers: [Server!]
