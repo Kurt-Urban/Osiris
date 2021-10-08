@@ -18,11 +18,11 @@ export class User {
   email: string;
 
   @Column()
-  @Field()
+  @Field({ nullable: true })
   firstName: string;
 
   @Column()
-  @Field()
+  @Field({ nullable: true })
   lastName: string;
 
   @OneToMany(() => Server, (server) => server.owner)
