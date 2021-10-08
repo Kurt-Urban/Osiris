@@ -1,0 +1,57 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateServerInput {
+  ownerID: String!
+  serverName: String!
+}
+
+input CreateUserInput {
+  firstName: String!
+  googleID: String!
+  lastName: String!
+}
+
+type Mutation {
+  createServer(data: CreateServerInput!): Server!
+  createUser(data: CreateUserInput!): User!
+  deleteServer(id: String!): Server!
+  deleteUser(id: String!): User!
+  updateServer(data: UpdateServerInput!, id: String!): Server!
+  updateUser(data: UpdateUserInput!, id: String!): User!
+}
+
+type Query {
+  getServer(id: String!): Server!
+  getServers: [Server!]!
+  getUser(id: String!): User!
+  getUsers: [User!]!
+}
+
+type Server {
+  id: String!
+  owner: User!
+  ownerID: String!
+  serverName: String!
+}
+
+input UpdateServerInput {
+  ownerID: String
+  serverName: String!
+}
+
+input UpdateUserInput {
+  firstName: String
+  googleID: String
+  lastName: String
+}
+
+type User {
+  email: String
+  firstName: String!
+  googleID: String
+  id: String!
+  lastName: String!
+  servers: [Server!]
+}
