@@ -17,7 +17,7 @@ export class UsersService {
       googleID: createUserInput.googleID,
     });
     if (existingUser !== undefined) return existingUser;
-    return this.usersRepository.save(newUser);
+    return await this.usersRepository.save(newUser);
   }
 
   async getUsers(): Promise<User[]> {
