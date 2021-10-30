@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/users/entities/user.entity';
-import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
-import { CreateServerInput } from './dto/create-server.input';
-import { UpdateServerInput } from './dto/update-server.input';
-import { Server } from './entities/server.entity';
+import { CreateServerInput } from '../dto/servers/create-server.input';
+import { UpdateServerInput } from '../dto/servers/update-server.input';
+import { Server } from '../entities/Server.entity';
 
 @Injectable()
 export class ServersService {
@@ -32,7 +30,6 @@ export class ServersService {
   }
 
   async deleteServer(id: string): Promise<Server> {
-    //cascade deletes
     const server = await this.serversRepository.findOneOrFail(id);
     return this.serversRepository.remove(server);
   }

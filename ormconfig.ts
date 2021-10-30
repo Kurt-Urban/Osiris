@@ -6,10 +6,10 @@ const ormConfig: PostgresConnectionOptions = {
   password: '12345678',
   database: 'serversdb',
   username: 'postgres',
-  useUTC: false,
+  useUTC: true,
   schema: 'public',
   synchronize: true,
-  entities: ['dist/**/entities/**/*.entity{.ts,.js}'],
+  entities: ['dist/src/entities/*.entity{.ts,.js}'],
 };
 
 export default ormConfig;

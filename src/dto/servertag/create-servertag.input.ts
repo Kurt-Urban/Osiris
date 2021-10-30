@@ -1,10 +1,10 @@
 import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
-export class CreateServerInput {
+export class CreateServerTagInput {
   @Field()
-  serverName: string;
+  serverID: string;
 
   @Field()
-  ownerID: string;
+  tagID: string;
 }

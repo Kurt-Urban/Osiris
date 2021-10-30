@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import ormConfig from '../ormconfig';
-import { UsersModule } from './users/users.module';
-import { ServersModule } from './servers/servers.module';
+import { UsersModule } from './modules/users.module';
+import { ServersModule } from './modules/servers.module';
+import { TagsModule } from './modules/tags.module';
+import { ServerTagsModule } from './modules/servertags.module';
 
 @Module({
   imports: [
@@ -19,8 +20,8 @@ import { ServersModule } from './servers/servers.module';
     TypeOrmModule.forRoot(ormConfig),
     UsersModule,
     ServersModule,
+    TagsModule,
+    ServerTagsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

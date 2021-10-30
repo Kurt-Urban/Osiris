@@ -3,8 +3,21 @@
 # ------------------------------------------------------
 
 input CreateServerInput {
+  bannerURL: String!
+  gameID: String!
+  ipAddress: String!
   ownerID: String!
   serverName: String!
+}
+
+input CreateServerTagInput {
+  serverID: String!
+  tagID: String!
+}
+
+input CreateTagInput {
+  label: String!
+  value: String!
 }
 
 input CreateUserInput {
@@ -15,31 +28,69 @@ input CreateUserInput {
 }
 
 type Mutation {
-  createServer(data: CreateServerInput!): Server!
-  createUser(data: CreateUserInput!): User!
+  createServer(input: CreateServerInput!): Server!
+  createServerTag(input: CreateServerTagInput!): Boolean!
+  createTag(input: CreateTagInput!): Tag!
+  createUser(input: CreateUserInput!): User!
   deleteServer(id: String!): Server!
   deleteUser(id: String!): User!
-  updateServer(data: UpdateServerInput!, id: String!): Server!
-  updateUser(data: UpdateUserInput!, id: String!): User!
+  removeTag(id: Int!): Tag!
+  updateServer(id: String!, input: UpdateServerInput!): Server!
+  updateTag(input: UpdateTagInput!): Tag!
+  updateUser(id: String!, input: UpdateUserInput!): User!
 }
 
 type Query {
   getServer(id: String!): Server!
+  getServerTags: [ServerTag!]!
   getServers: [Server!]!
+  getTags: [Tag!]!
   getUser(id: String!): User!
   getUsers: [User!]!
+  tag(id: Int!): Tag!
 }
 
 type Server {
+  bannerURL: String
+  gameID: String
   id: String!
+  ipAddress: String
+  listSlot: String
   owner: User!
   ownerID: String!
   serverName: String!
+  status: String
+  tags: [ServerTag!]
+}
+
+type ServerTag {
+  server: Server!
+  serverID: String!
+  tag: Tag!
+  tagID: String!
+}
+
+type Tag {
+  id: String!
+  label: String!
+  servers: [ServerTag!]
+  value: String!
 }
 
 input UpdateServerInput {
+  bannerURL: String!
+  gameID: String!
+  ipAddress: String!
   ownerID: String
   serverName: String!
+  status: String
+  tags: String
+}
+
+input UpdateTagInput {
+  id: Int!
+  label: String
+  value: String
 }
 
 input UpdateUserInput {
