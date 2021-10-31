@@ -13,10 +13,6 @@ export class Tag {
   @Field()
   value: string;
 
-  @Column()
-  @Field()
-  label: string;
-
   @OneToMany(() => ServerTag, (st) => st.tag)
   @Field(() => [ServerTag], { nullable: true })
   servers?: Promise<ServerTag[]>;

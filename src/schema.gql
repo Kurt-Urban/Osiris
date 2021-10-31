@@ -16,7 +16,6 @@ input CreateServerTagInput {
 }
 
 input CreateTagInput {
-  label: String!
   value: String!
 }
 
@@ -72,7 +71,6 @@ type ServerTag {
 
 type Tag {
   id: String!
-  label: String!
   servers: [ServerTag!]
   value: String!
 }
@@ -89,7 +87,6 @@ input UpdateServerInput {
 
 input UpdateTagInput {
   id: Int!
-  label: String
   value: String
 }
 
