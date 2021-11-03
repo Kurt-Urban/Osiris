@@ -10,6 +10,12 @@ export class TagsService {
   constructor(@InjectRepository(Tag) private tagsRepository: Repository<Tag>) {}
 
   async createTag(input: CreateTagInput) {
+    const existingTag = await this.tagsRepository.findOne({
+      value: input.value,
+    });
+    if (existingTag) {
+      throw new Error('Tag already exists');
+    }
     const newTag = await this.tagsRepository.create(input);
     return this.tagsRepository.save(newTag);
   }
@@ -18,8 +24,11 @@ export class TagsService {
     return this.tagsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tag`;
+  async getTag(id: string, value: boolean) {
+    const tag = !value
+      ? await this.tagsRepository.findOne(id)
+      : await this.tagsRepository.findOne({ value: id });
+    return tag;
   }
 
   update(id: number, input: UpdateTagInput) {

@@ -27,7 +27,7 @@ input CreateUserInput {
 }
 
 type Mutation {
-  createServer(input: CreateServerInput!): Server!
+  createServer(input: CreateServerInput!, tags: [String!]!): Server!
   createServerTag(input: CreateServerTagInput!): Boolean!
   createTag(input: CreateTagInput!): Tag!
   createUser(input: CreateUserInput!): User!
@@ -43,10 +43,10 @@ type Query {
   getServer(id: String!): Server!
   getServerTags: [ServerTag!]!
   getServers: [Server!]!
+  getTag(id: String!, value: Boolean): Tag!
   getTags: [Tag!]!
   getUser(id: String!): User!
   getUsers: [User!]!
-  tag(id: Int!): Tag!
 }
 
 type Server {

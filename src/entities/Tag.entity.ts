@@ -13,6 +13,8 @@ export class Tag {
   @Field()
   value: string;
 
+  //To Do: add isPublic column
+
   @OneToMany(() => ServerTag, (st) => st.tag)
   @Field(() => [ServerTag], { nullable: true })
   servers?: Promise<ServerTag[]>;

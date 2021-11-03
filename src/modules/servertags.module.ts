@@ -7,5 +7,6 @@ import { ServerTag } from 'src/entities/ServerTag.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([ServerTag])],
   providers: [ServerTagResolver, ServerTagsService],
+  exports: [ServerTagsService],
 })
 export class ServerTagsModule {}

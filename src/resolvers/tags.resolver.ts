@@ -18,9 +18,12 @@ export class TagsResolver {
     return this.tagsService.getTags();
   }
 
-  @Query(() => Tag, { name: 'tag' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.tagsService.findOne(id);
+  @Query(() => Tag)
+  getTag(
+    @Args('id') id: string,
+    @Args('value', { nullable: true }) value: boolean,
+  ) {
+    return this.tagsService.getTag(id, value);
   }
 
   @Mutation(() => Tag)

@@ -12,8 +12,20 @@ export class ServersService {
   ) {}
 
   async createServer(input: CreateServerInput) {
+    const existingServer = await this.serversRepository.findOne({
+      serverName: input.serverName,
+    });
+    if (existingServer) {
+      throw new Error('Server already exists');
+    }
     const newServer = await this.serversRepository.create(input);
     return this.serversRepository.save(newServer);
+  }
+
+  async addTagsToServer(id: string, tags: string[]): Promise<Server> {
+    const server = await this.serversRepository.findOne(id);
+
+    return this.serversRepository.save(server);
   }
 
   async getServers(): Promise<Server[]> {
