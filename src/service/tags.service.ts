@@ -13,15 +13,17 @@ export class TagsService {
     const existingTag = await this.tagsRepository.findOne({
       value: input.value,
     });
-    if (existingTag) {
-      throw new Error('Tag already exists');
-    }
+    if (existingTag) throw new Error('Tag already exists');
     const newTag = await this.tagsRepository.create(input);
     return this.tagsRepository.save(newTag);
   }
 
   async getTags(): Promise<Tag[]> {
-    return this.tagsRepository.find();
+    return await this.tagsRepository.find();
+  }
+
+  async getTagsByID(id: string) {
+    return await this.tagsRepository.find({ where: { id } });
   }
 
   async getTag(id: string, value: boolean) {

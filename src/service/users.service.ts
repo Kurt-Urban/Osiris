@@ -30,10 +30,10 @@ export class UsersService {
   }
 
   async updateUser(id: string, data: UpdateUserInput): Promise<User> {
-    const user = await this.usersRepository.findOneOrFail(id);
+    const user = await this.usersRepository.findOne(id);
     if (!user) throw new Error('User not found');
     await this.usersRepository.update(id, { ...data });
-    return await this.usersRepository.findOneOrFail(id);
+    return await this.usersRepository.findOne(id);
   }
 
   async deleteUser(id: string) {

@@ -21,7 +21,27 @@ export class ServerTagsService {
     return true;
   }
 
+  async getServerTag(serverID: string, tagID: string) {
+    const serverTag = await this.serverTagRepository.findOne({
+      serverID,
+      tagID,
+    });
+    if (!serverTag) throw new Error('ServerTag not found');
+    return serverTag;
+  }
+
+  async getServerTagsByServer(serverID: string) {
+    return await this.serverTagRepository.find({ where: { serverID } });
+  }
+  async getServerTagsByTag(tagID: string) {
+    return await this.serverTagRepository.find({ where: { tagID } });
+  }
+
   async getServerTags() {
     return await this.serverTagRepository.find();
+  }
+
+  async deleteServerTag(serverID: string, tagID: string) {
+    return await this.serverTagRepository.delete({ serverID, tagID });
   }
 }

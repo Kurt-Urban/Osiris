@@ -15,9 +15,7 @@ export class ServersService {
     const existingServer = await this.serversRepository.findOne({
       serverName: input.serverName,
     });
-    if (existingServer) {
-      throw new Error('Server already exists');
-    }
+    if (existingServer) throw new Error('Server already exists');
     const newServer = await this.serversRepository.create(input);
     return this.serversRepository.save(newServer);
   }
@@ -36,9 +34,11 @@ export class ServersService {
     return await this.serversRepository.findOneOrFail(id);
   }
 
-  async updateServer(id: string, data: UpdateServerInput): Promise<Server> {
+  async updateServer(id: string, input: UpdateServerInput): Promise<Server> {
     const server = await this.serversRepository.findOneOrFail(id);
-    return this.serversRepository.save(server);
+    if (!server) throw new Error('Server not found');
+    await this.serversRepository.update(id, { ...input });
+    return await this.serversRepository.findOne(id);
   }
 
   async deleteServer(id: string): Promise<Server> {

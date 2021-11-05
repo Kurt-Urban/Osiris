@@ -3,21 +3,18 @@ import { InputType, Field, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateServerInput extends PartialType(CreateServerInput) {
-  @Field()
+  @Field({ nullable: true })
   serverName: string;
 
-  @Field()
+  @Field({ nullable: true })
   ipAddress: string;
 
-  @Field()
+  @Field({ nullable: true })
   bannerURL: string;
 
-  @Field()
+  @Field({ nullable: true })
   gameID: string;
 
   @Field({ nullable: true })
   status: string;
-
-  @Field({ nullable: true })
-  tags: '[String]';
 }

@@ -27,14 +27,14 @@ input CreateUserInput {
 }
 
 type Mutation {
-  createServer(input: CreateServerInput!, tags: [String!]!): Server!
+  createServer(input: CreateServerInput!, tags: [String!]): Server!
   createServerTag(input: CreateServerTagInput!): Boolean!
   createTag(input: CreateTagInput!): Tag!
   createUser(input: CreateUserInput!): User!
   deleteServer(id: String!): Server!
   deleteUser(id: String!): User!
   removeTag(id: Int!): Tag!
-  updateServer(id: String!, input: UpdateServerInput!): Server!
+  updateServer(id: String!, input: UpdateServerInput!, tags: [String!]): Server!
   updateTag(input: UpdateTagInput!): Tag!
   updateUser(id: String!, input: UpdateUserInput!): User!
 }
@@ -42,9 +42,12 @@ type Mutation {
 type Query {
   getServer(id: String!): Server!
   getServerTags: [ServerTag!]!
+  getServerTagsByServer(serverID: String!): [ServerTag!]!
+  getServerTagsByTag(tagID: String!): [ServerTag!]!
   getServers: [Server!]!
   getTag(id: String!, value: Boolean): Tag!
   getTags: [Tag!]!
+  getTagsByID(id: String): [Tag!]!
   getUser(id: String!): User!
   getUsers: [User!]!
 }
@@ -76,13 +79,12 @@ type Tag {
 }
 
 input UpdateServerInput {
-  bannerURL: String!
-  gameID: String!
-  ipAddress: String!
+  bannerURL: String
+  gameID: String
+  ipAddress: String
   ownerID: String
-  serverName: String!
+  serverName: String
   status: String
-  tags: String
 }
 
 input UpdateTagInput {

@@ -14,6 +14,11 @@ export class TagsResolver {
   }
 
   @Query(() => [Tag])
+  getTagsByID(@Args('id', { nullable: true }) id: string) {
+    return this.tagsService.getTagsByID(id);
+  }
+
+  @Query(() => [Tag])
   getTags() {
     return this.tagsService.getTags();
   }

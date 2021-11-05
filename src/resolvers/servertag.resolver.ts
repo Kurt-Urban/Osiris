@@ -16,6 +16,17 @@ export class ServerTagResolver {
     await this.serverTagsService.createServerTag(input);
     return true;
   }
+
+  @Query(() => [ServerTag])
+  async getServerTagsByServer(@Args('serverID') serverID: string) {
+    return await this.serverTagsService.getServerTagsByServer(serverID);
+  }
+
+  @Query(() => [ServerTag])
+  async getServerTagsByTag(@Args('tagID') tagID: string) {
+    return await this.serverTagsService.getServerTagsByTag(tagID);
+  }
+
   @Query(() => [ServerTag])
   async getServerTags() {
     return await this.serverTagsService.getServerTags();
