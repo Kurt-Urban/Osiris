@@ -35,14 +35,14 @@ export class ServersService {
   }
 
   async updateServer(id: string, input: UpdateServerInput): Promise<Server> {
-    const server = await this.serversRepository.findOneOrFail(id);
+    const server = await this.serversRepository.findOne(id);
     if (!server) throw new Error('Server not found');
     await this.serversRepository.update(id, { ...input });
     return await this.serversRepository.findOne(id);
   }
 
   async deleteServer(id: string): Promise<Server> {
-    const server = await this.serversRepository.findOneOrFail(id);
+    const server = await this.serversRepository.findOne(id);
     return this.serversRepository.remove(server);
   }
 }

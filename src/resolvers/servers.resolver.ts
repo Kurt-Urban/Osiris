@@ -5,7 +5,6 @@ import { CreateServerInput } from '../dto/servers/create-server.input';
 import { UpdateServerInput } from '../dto/servers/update-server.input';
 import { TagsService } from 'src/service/tags.service';
 import { ServerTagsService } from 'src/service/servertags.service';
-import { Tag } from 'src/entities/Tag.entity';
 
 @Resolver(() => Server)
 export class ServersResolver {
