@@ -1,7 +1,8 @@
 # compiled output
 /dist
 /node_modules
-secrets.env
+*.env
+ormconfig.txt
 /.aws
 
 # Logs

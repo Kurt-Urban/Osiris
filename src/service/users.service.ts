@@ -26,7 +26,7 @@ export class UsersService {
 
   async getUser(id: string): Promise<User> {
     if (id.includes('-')) return await this.usersRepository.findOneOrFail(id);
-    return await this.usersRepository.findOneOrFail({ googleID: id });
+    return await this.usersRepository.findOne({ googleID: id });
   }
 
   async updateUser(id: string, data: UpdateUserInput): Promise<User> {
