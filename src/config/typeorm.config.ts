@@ -13,7 +13,7 @@ export default class TypeOrmConfig {
       username: configService.get('DB_USER'),
       password: configService.get('DB_PASSWORD'),
       database: configService.get('DB_NAME'),
-      entities: ['dist/src/entities/*.entity{.ts,.js}'],
+      entities: ['dist/entities/*.entity{.ts,.js}'],
       synchronize: true,
       useUTC: true,
       schema: 'public',

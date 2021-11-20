@@ -22,7 +22,7 @@ input CreateTagInput {
 input CreateUserInput {
   email: String
   firstName: String
-  googleID: String!
+  id: String!
   lastName: String
 }
 
@@ -95,14 +95,13 @@ input UpdateTagInput {
 input UpdateUserInput {
   email: String
   firstName: String
-  googleID: String
+  id: String
   lastName: String
 }
 
 type User {
   email: String
   firstName: String
-  googleID: String
   id: String!
   lastName: String
   servers: [Server!]
