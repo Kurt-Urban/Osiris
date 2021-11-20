@@ -1,17 +1,13 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Server } from 'src/entities/Server.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
 @ObjectType()
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   @Field()
   id: string;
-
-  @Column()
-  @Field({ nullable: true })
-  googleID: string;
 
   @Column()
   @Field({ nullable: true })

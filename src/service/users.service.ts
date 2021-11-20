@@ -14,7 +14,7 @@ export class UsersService {
   async createUser(createUserInput: CreateUserInput): Promise<User> {
     const newUser = await this.usersRepository.create(createUserInput);
     const existingUser = await this.usersRepository.findOne({
-      googleID: createUserInput.googleID,
+      id: createUserInput.id,
     });
     if (existingUser !== undefined) return existingUser;
     return await this.usersRepository.save(newUser);
@@ -26,7 +26,7 @@ export class UsersService {
 
   async getUser(id: string): Promise<User> {
     if (id.includes('-')) return await this.usersRepository.findOneOrFail(id);
-    return await this.usersRepository.findOne({ googleID: id });
+    return await this.usersRepository.findOne(id);
   }
 
   async updateUser(id: string, data: UpdateUserInput): Promise<User> {
