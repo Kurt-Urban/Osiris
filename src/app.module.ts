@@ -1,26 +1,26 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import ormConfig from '../ormconfig';
-import { UsersModule } from './users/users.module';
-import { ServersModule } from './servers/servers.module';
+import { UsersModule } from './modules/users.module';
+import { ServersModule } from './modules/servers.module';
+import { TagsModule } from './modules/tags.module';
+import { ServerTagsModule } from './modules/servertags.module';
+import { typeOrmConfigAsync } from './config/typeorm.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ envFilePath: 'dev.env', isGlobal: true }),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
-    TypeOrmModule.forRoot(ormConfig),
+    TypeOrmModule.forRootAsync(typeOrmConfigAsync),
     UsersModule,
     ServersModule,
+    TagsModule,
+    ServerTagsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

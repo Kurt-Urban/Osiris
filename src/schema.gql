@@ -3,55 +3,106 @@
 # ------------------------------------------------------
 
 input CreateServerInput {
+  bannerURL: String!
+  gameID: String!
+  ipAddress: String!
   ownerID: String!
   serverName: String!
 }
 
+input CreateServerTagInput {
+  serverID: String!
+  tagID: String!
+}
+
+input CreateTagInput {
+  value: String!
+}
+
 input CreateUserInput {
-  firstName: String!
-  googleID: String!
-  lastName: String!
+  email: String
+  firstName: String
+  id: String!
+  lastName: String
 }
 
 type Mutation {
-  createServer(data: CreateServerInput!): Server!
-  createUser(data: CreateUserInput!): User!
+  createServer(input: CreateServerInput!, tags: [String!]): Server!
+  createServerTag(input: CreateServerTagInput!): Boolean!
+  createTag(input: CreateTagInput!): Tag!
+  createUser(input: CreateUserInput!): User!
   deleteServer(id: String!): Server!
   deleteUser(id: String!): User!
-  updateServer(data: UpdateServerInput!, id: String!): Server!
-  updateUser(data: UpdateUserInput!, id: String!): User!
+  removeTag(id: Int!): Tag!
+  updateServer(id: String!, input: UpdateServerInput!, tags: [String!]): Server!
+  updateTag(input: UpdateTagInput!): Tag!
+  updateUser(id: String!, input: UpdateUserInput!): User!
 }
 
 type Query {
   getServer(id: String!): Server!
+  getServerTags: [ServerTag!]!
+  getServerTagsByServer(serverID: String!): [ServerTag!]!
+  getServerTagsByTag(tagID: String!): [ServerTag!]!
   getServers: [Server!]!
+  getTag(id: String!, value: Boolean): Tag!
+  getTags: [Tag!]!
+  getTagsByID(id: String): [Tag!]!
   getUser(id: String!): User!
   getUsers: [User!]!
 }
 
 type Server {
+  bannerURL: String
+  gameID: String
   id: String!
+  ipAddress: String
+  listSlot: String
   owner: User!
   ownerID: String!
   serverName: String!
+  status: String
+  tags: [ServerTag!]
+}
+
+type ServerTag {
+  server: Server!
+  serverID: String!
+  tag: Tag!
+  tagID: String!
+}
+
+type Tag {
+  id: String!
+  servers: [ServerTag!]
+  value: String!
 }
 
 input UpdateServerInput {
+  bannerURL: String
+  gameID: String
+  ipAddress: String
   ownerID: String
-  serverName: String!
+  serverName: String
+  status: String
+}
+
+input UpdateTagInput {
+  id: Int!
+  value: String
 }
 
 input UpdateUserInput {
+  email: String
   firstName: String
-  googleID: String
+  id: String
   lastName: String
 }
 
 type User {
   email: String
-  firstName: String!
-  googleID: String
+  firstName: String
   id: String!
-  lastName: String!
+  lastName: String
   servers: [Server!]
 }
