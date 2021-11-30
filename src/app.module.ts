@@ -7,11 +7,14 @@ import { UsersModule } from './modules/users.module';
 import { ServersModule } from './modules/servers.module';
 import { TagsModule } from './modules/tags.module';
 import { ServerTagsModule } from './modules/servertags.module';
-import { typeOrmConfigAsync } from './config/typeorm.config';
+import { typeOrmConfigAsync } from '../typeorm.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: 'dev.env', isGlobal: true }),
+    ConfigModule.forRoot({
+      envFilePath: 'dev.env',
+      isGlobal: true,
+    }),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
