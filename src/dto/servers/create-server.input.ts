@@ -1,4 +1,4 @@
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 
 @InputType()
 export class CreateServerInput {
@@ -15,5 +15,32 @@ export class CreateServerInput {
   bannerURL: string;
 
   @Field()
-  gameID: string;
+  description: string;
+
+  @Field({ nullable: true })
+  status: string;
+
+  @Field({ nullable: true })
+  trailerURL: string;
+
+  @Field({ nullable: true })
+  websiteURL: string;
+
+  @Field({ nullable: true })
+  discordURL: string;
+
+  @Field({ nullable: true })
+  listSlot: string;
+
+  @Field({ nullable: true })
+  gameVersion: string;
+
+  @Field({ nullable: true })
+  country: string;
+
+  @Field(() => Int, { nullable: true })
+  port: number;
+
+  @Field(() => Int, { nullable: true })
+  playerLikes: number;
 }

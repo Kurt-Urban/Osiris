@@ -1,5 +1,6 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { User } from 'src/entities/User.entity';
+import { ServerTag } from './ServerTag.entity';
 import {
   Column,
   Entity,
@@ -8,7 +9,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { ServerTag } from './ServerTag.entity';
 
 @Entity({ schema: 'public', name: 'server' })
 @ObjectType()
@@ -25,13 +25,29 @@ export class Server {
   @Field()
   ownerID: string;
 
-  @Column({ nullable: true })
-  @Field({ nullable: true })
+  @Column()
+  @Field()
+  description: string;
+
+  @Column()
+  @Field()
   ipAddress: string;
+
+  @Column()
+  @Field()
+  bannerURL: string;
 
   @Column({ nullable: true })
   @Field({ nullable: true })
-  bannerURL: string;
+  trailerURL: string;
+
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  websiteURL: string;
+
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  discordURL: string;
 
   @Column({ nullable: true })
   @Field({ nullable: true })
@@ -39,11 +55,23 @@ export class Server {
 
   @Column({ nullable: true })
   @Field({ nullable: true })
-  gameID: string;
+  listSlot: string;
 
   @Column({ nullable: true })
   @Field({ nullable: true })
-  listSlot: string;
+  gameVersion: string;
+
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  country: string;
+
+  @Column('int', { nullable: true })
+  @Field(() => Int, { nullable: true })
+  port: number;
+
+  @Column('int', { nullable: true })
+  @Field(() => Int, { nullable: true })
+  playerLikes: number;
 
   @OneToMany(() => ServerTag, (st) => st.server, { cascade: true })
   @Field(() => [ServerTag], { nullable: true })

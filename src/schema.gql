@@ -4,10 +4,19 @@
 
 input CreateServerInput {
   bannerURL: String!
-  gameID: String!
+  country: String
+  description: String!
+  discordURL: String
+  gameVersion: String
   ipAddress: String!
+  listSlot: String
   ownerID: String!
+  playerLikes: Int
+  port: Int
   serverName: String!
+  status: String
+  trailerURL: String
+  websiteURL: String
 }
 
 input CreateServerTagInput {
@@ -20,10 +29,11 @@ input CreateTagInput {
 }
 
 input CreateUserInput {
-  email: String
+  email: String!
   firstName: String
   id: String!
   lastName: String
+  role: String!
 }
 
 type Mutation {
@@ -53,16 +63,23 @@ type Query {
 }
 
 type Server {
-  bannerURL: String
-  gameID: String
+  bannerURL: String!
+  country: String
+  description: String!
+  discordURL: String
+  gameVersion: String
   id: String!
-  ipAddress: String
+  ipAddress: String!
   listSlot: String
   owner: User!
   ownerID: String!
+  playerLikes: Int
+  port: Int
   serverName: String!
   status: String
   tags: [ServerTag!]
+  trailerURL: String
+  websiteURL: String
 }
 
 type ServerTag {
@@ -80,11 +97,19 @@ type Tag {
 
 input UpdateServerInput {
   bannerURL: String
-  gameID: String
+  country: String
+  description: String
+  discordURL: String
+  gameVersion: String
   ipAddress: String
+  listSlot: String
   ownerID: String
+  playerLikes: Int
+  port: Int
   serverName: String
   status: String
+  trailerURL: String
+  websiteURL: String
 }
 
 input UpdateTagInput {
@@ -97,6 +122,7 @@ input UpdateUserInput {
   firstName: String
   id: String
   lastName: String
+  role: String
 }
 
 type User {
@@ -104,5 +130,6 @@ type User {
   firstName: String
   id: String!
   lastName: String
+  role: String!
   servers: [Server!]
 }

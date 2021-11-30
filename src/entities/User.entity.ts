@@ -14,6 +14,10 @@ export class User {
   email: string;
 
   @Column()
+  @Field()
+  role: string;
+
+  @Column()
   @Field({ nullable: true })
   firstName: string;
 
